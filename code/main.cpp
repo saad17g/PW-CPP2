@@ -96,60 +96,6 @@ void RechercheAvancee( Catalogue& catalogue)
   delete [] VilleDepart;
 }
 
-TrajetSimple* importTrajetSimple(istream& inFile)
-{
-  string villeDepart;
-  string villeArrivee;
-  string Transport;
-  getline(inFile, villeDepart);
-  getline(inFile, villeArrivee);
-  getline(inFile, Transport);
-  TrajetSimple* trajet = new TrajetSimple(villeDepart.c_str(), villeArrivee.c_str(), Transport.c_str());
-  return trajet;
-}
-
-TrajetCompose* importTrajetCompose(istream &inFile)
-{
-  string courant;
-  int nbTrajets; 
-  inFile >> nbTrajets;
-  getline(inFile, courant);
-  TrajetCompose* trajet = new TrajetCompose();
-  for(int i = 0 ; i<nbTrajets; i++)
-  {
-    getline(inFile, courant);
-    if(courant == "TS")
-    {
-      trajet->AjouterTrajet(importTrajetSimple(inFile));
-    } else if (courant == "TC")
-    {
-      trajet->AjouterTrajet(importTrajetCompose(inFile));
-    }
-  }
-  return trajet;
-}
-
-void ImportFile(Catalogue &catalogue, const char* fileName)
-{
-  ifstream inFile;
-  inFile.open(fileName);
-  string courant;
-  int nbTrajets;
-  while(inFile && inFile.eof() != 1)
-  {
-    getline(inFile, courant);
-    cout << courant << endl;
-    if (courant == "TS")
-    {
-      catalogue.Ajouter(importTrajetSimple(inFile));
-    } else if ( courant == "TC") 
-    {
-      catalogue.Ajouter(importTrajetCompose(inFile));
-    }
-  }
-  inFile.close();
-}
-
 int main()
 {
   cout << "//////////////////////////////////////////////////////////////////////////" << endl \
@@ -201,35 +147,13 @@ int main()
       case 6: {
         cout << "Veuillez rentrer le nom du fichier, avec son extension" <<endl;
         cin >> File;
-        ImportFile(catalogue, File.c_str());
+        catalogue.ImportFile(File.c_str());
         break;
       }
       case 7: {
         cout << "Veuillez rentrer le nom du fichier, avec son extension" <<endl;
         cin >> File;
         catalogue.ExportFile(File.c_str());
-        // cout << "Veuillez rentrer le nom du fichier, avec son extension" <<endl;
-        // cin >> File;
-        // ofstream ofFile;
-        // ofFile.open(File.c_str());
-        // TrajetSimple* trajet = new TrajetSimple("paris", "marseille", "bus");
-        // TrajetSimple* trajet2 = new TrajetSimple("marseille", "paris", "avion");
-        // TrajetSimple* trajet3 = new TrajetSimple("paris", "marseille", "bus");
-        // TrajetSimple* trajet4 = new TrajetSimple("marseille", "paris", "avion");
-        // //string formate = trajet->Formatage();
-        // TrajetCompose* trajetC = new TrajetCompose();
-        // trajetC->AjouterTrajet(trajet);
-        // trajetC->AjouterTrajet(trajet2);
-        // trajetC->AjouterTrajet(trajet3);
-        // trajetC->AjouterTrajet(trajet4);
-        // trajetC->Afficher();
-        // cout << trajetC->Formatage() <<endl;
-        // TrajetSimple* trajet2 = new TrajetSimple("marseille", "lisbonne", "bus");
-        // trajetC->AjouterTrajet(trajet2);
-        //string formate2 = trajetC->Formatage();
-        //ofFile << formate;
-        //ofFile << formate2;
-        // ofFile.close();
         break;
       }
       case 8: {

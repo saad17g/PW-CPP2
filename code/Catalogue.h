@@ -13,6 +13,16 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "ListeChainee.h"
+#include "TrajetCompose.h"
+#include "TrajetSimple.h"
+
+#include <cstring>
+#include <string>
+#include <istream>
+#include <fstream>
+
+#include <iostream>
+using namespace std;
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -38,6 +48,8 @@ public:
 
   void ExportFile(const char* fileName) const;
 
+  void ImportFile(const char* fileName);
+
   void Rechercher ( const char* VilleDepart, const char* VilleArrivee) const;
 
   void rechercheAvancee(const char* VilleDepart, const char* VilleArrivee) const;
@@ -61,6 +73,10 @@ protected:
   void parcoursEnProfondeur(const Trajet** combinaison, int profondeurMax,
                                     const char* VilleDepart, const char* VilleArrivee,
                                     bool& troue, int niveau ) const;
+                                  
+  TrajetCompose* importTrajetCompose(istream&);
+
+  TrajetSimple* importTrajetSimple(istream&);
   //----------------------------------------------------- Attributs protégés
   ListeChainee listeTrajets;
 };

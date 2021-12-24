@@ -12,7 +12,6 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-#include <fstream>
 #include <iostream>
 using namespace std;
 #include <cstring>
@@ -33,6 +32,39 @@ void Catalogue::Afficher (void) const {
   cout << "----- Fin du catalogue -------" << endl << endl;
 } //----- Fin de Afficher
 
+TrajetSimple* Catalogue::importTrajetSimple(istream& inFile)
+{
+  string villeDepart;
+  string villeArrivee;
+  string Transport;
+  getline(inFile, villeDepart);
+  getline(inFile, villeArrivee);
+  getline(inFile, Transport);
+  TrajetSimple* trajet = new TrajetSimple(villeDepart.c_str(), villeArrivee.c_str(), Transport.c_str());
+  return trajet;
+}
+
+TrajetCompose* Catalogue::importTrajetCompose(istream &inFile)
+{
+  string courant;
+  int nbTrajets; 
+  inFile >> nbTrajets;
+  getline(inFile, courant);
+  TrajetCompose* trajet = new TrajetCompose();
+  for(int i = 0 ; i<nbTrajets; i++)
+  {
+    getline(inFile, courant);
+    if(courant == "TS")
+    {
+      trajet->AjouterTrajet(importTrajetSimple(inFile));
+    } else if (courant == "TC")
+    {
+      trajet->AjouterTrajet(importTrajetCompose(inFile));
+    }
+  }
+  return trajet;
+}
+
 void Catalogue::ExportFile(const char* fileName) const
 {
   ofstream outFile;
@@ -43,6 +75,27 @@ void Catalogue::ExportFile(const char* fileName) const
   }
   outFile.close();
 }
+
+void Catalogue::ImportFile(const char* fileName)
+{
+  ifstream inFile;
+  inFile.open(fileName);
+  string courant;
+  int nbTrajets;
+  while(inFile && inFile.eof() != 1)
+  {
+    getline(inFile, courant);
+    if (courant == "TS")
+    {
+      Ajouter(importTrajetSimple(inFile));
+    } else if ( courant == "TC") 
+    {
+      Ajouter(importTrajetCompose(inFile));
+    }
+  }
+  inFile.close();
+}
+
 void Catalogue::Rechercher ( const char* VilleDepart, const char* VilleArrivee) const {
 
   bool trajetTrouve = false;
