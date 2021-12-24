@@ -42,7 +42,10 @@ public:
 
     const char* GetVilleArrivee( void ) const;
 
+    int GetNombreTrajets( void );
     void Afficher( void ) const;
+
+    //std::string Formatage( void ) const;
 
     void AjouterTrajet ( Trajet* );
     // Mode d'emploi :
@@ -68,6 +71,7 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
     ListeChainee listeTrajets;
+    int nombreTrajets;
 };
 
 //-------------------------------- Autres définitions dépendantes de <TrajetCompose>

@@ -12,8 +12,8 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-#include <iostream>
 #include <cstring>
+#include <iostream>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -38,6 +38,13 @@ void TrajetSimple::Afficher( void ) const {
     cout << "Trajet de " << villeDepart << " à " << villeArrivee << " en "
         << moyenTransport << endl;
 }
+
+// string TrajetSimple::Formatage( void ) const {
+//     string strVilleDepart(villeDepart);
+//     string strVilleArrivee(villeArrivee);
+//     string strMoyenTransport(moyenTransport);
+//     return "TS\n" + strVilleDepart + "\n" + strVilleArrivee+ "\n" + strMoyenTransport + "\n";
+// }
 
 //-------------------------------------------- Constructeurs - destructeur
 

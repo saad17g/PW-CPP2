@@ -12,7 +12,7 @@
 #define TRAJET_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include <string>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -39,6 +39,9 @@ public:
 
     // Retourne un pointeur sur villeArrivee.
     virtual const char* GetVilleArrivee( void ) const = 0;
+
+    // Formate le trajet afin de l'écrire dans un fichier.
+    //virtual std::string Formatage( void ) const = 0;
 
     // Affiche les informations du trajet.
     virtual void Afficher( void ) const = 0;

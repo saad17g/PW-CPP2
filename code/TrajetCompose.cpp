@@ -32,14 +32,31 @@ const char* TrajetCompose::GetVilleArrivee( void ) const {
     return listeTrajets.GetFin()->GetValeur()->GetVilleArrivee();
 } //----- Fin de GetVilleArrivee
 
+int TrajetCompose::GetNombreTrajets( void )
+{
+    return nombreTrajets;
+}
+
 void TrajetCompose::Afficher( void ) const {
     cout << "Trajet composé : " << endl;
     listeTrajets.Afficher ( );
     cout << endl;
 } //----- Fin de Afficher
 
+//string TrajetCompose::Formatage( void ) const {
+    // string formatage;
+    // formatage += "TC\n" + nombreTrajets;
+    // formatage += "\n";
+    // for (int i = 0 ; i< nombreTrajets; i++)
+    // {
+    //     formatage+= listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
+    // }
+    // return formatage;
+//}
+
 void TrajetCompose::AjouterTrajet ( Trajet* nouveauTrajet) {
     listeTrajets.Ajouter( new Cellule(nouveauTrajet, NULL));
+    nombreTrajets++;
 } //----- Fin de AjouterTrajet
 
 void TrajetCompose::RetirerTrajet ( void ) {
