@@ -12,6 +12,7 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
+#include <string>
 #include <iostream>
 using namespace std;
 
@@ -44,18 +45,18 @@ void TrajetCompose::Afficher( void ) const {
 } //----- Fin de Afficher
 
 string TrajetCompose::Formatage( void ) const{
-    
+    string formatage = "TC\n";
+    string s = to_string(nombreTrajets);
+    formatage += s;
+    formatage += "\n";
+    int i ;
+    for (i = 0 ; i< nombreTrajets-1; i++)
+    {
+        formatage+= listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
+    }
+    formatage += listeTrajets.GetAtIndex(i-1)->GetSuivante()->GetValeur()->Formatage();
+    return formatage;
 }
-//string TrajetCompose::Formatage( void ) const {
-    // string formatage;
-    // formatage += "TC\n" + nombreTrajets;
-    // formatage += "\n";
-    // for (int i = 0 ; i< nombreTrajets; i++)
-    // {
-    //     formatage+= listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
-    // }
-    // return formatage;
-//}
 
 void TrajetCompose::AjouterTrajet ( Trajet* nouveauTrajet) {
     listeTrajets.Ajouter( new Cellule(nouveauTrajet, NULL));

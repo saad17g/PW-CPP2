@@ -192,21 +192,28 @@ int main()
         break;
       }
       case 7: {
-        cout << "Veuillez rentrer le nom du fichier, avec son extension" <<endl;
-        cin >> File;
-        ofstream ofFile;
-        ofFile.open(File.c_str());
+        // cout << "Veuillez rentrer le nom du fichier, avec son extension" <<endl;
+        // cin >> File;
+        // ofstream ofFile;
+        // ofFile.open(File.c_str());
         TrajetSimple* trajet = new TrajetSimple("paris", "marseille", "bus");
-        string formate = trajet->Formatage();
+        TrajetSimple* trajet2 = new TrajetSimple("marseille", "paris", "avion");
+        TrajetSimple* trajet3 = new TrajetSimple("paris", "marseille", "bus");
+        TrajetSimple* trajet4 = new TrajetSimple("marseille", "paris", "avion");
+        //string formate = trajet->Formatage();
         TrajetCompose* trajetC = new TrajetCompose();
         trajetC->AjouterTrajet(trajet);
+        trajetC->AjouterTrajet(trajet2);
+        trajetC->AjouterTrajet(trajet3);
+        trajetC->AjouterTrajet(trajet4);
         trajetC->Afficher();
+        cout << trajetC->Formatage() <<endl;
         // TrajetSimple* trajet2 = new TrajetSimple("marseille", "lisbonne", "bus");
         // trajetC->AjouterTrajet(trajet2);
         //string formate2 = trajetC->Formatage();
-        ofFile << formate;
+        //ofFile << formate;
         //ofFile << formate2;
-        ofFile.close();
+        // ofFile.close();
         break;
       }
       case 8: {
