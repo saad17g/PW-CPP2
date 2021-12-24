@@ -41,7 +41,7 @@ public:
     virtual const char* GetVilleArrivee( void ) const = 0;
 
     // Formate le trajet afin de l'écrire dans un fichier.
-    //virtual std::string Formatage( void ) const = 0;
+    virtual std::string Formatage( void ) const = 0;
 
     // Affiche les informations du trajet.
     virtual void Afficher( void ) const = 0;

@@ -45,7 +45,7 @@ public:
     int GetNombreTrajets( void );
     void Afficher( void ) const;
 
-    //std::string Formatage( void ) const;
+    std::string Formatage( void ) const;
 
     void AjouterTrajet ( Trajet* );
     // Mode d'emploi :

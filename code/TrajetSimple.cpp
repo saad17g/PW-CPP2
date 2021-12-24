@@ -39,12 +39,12 @@ void TrajetSimple::Afficher( void ) const {
         << moyenTransport << endl;
 }
 
-// string TrajetSimple::Formatage( void ) const {
-//     string strVilleDepart(villeDepart);
-//     string strVilleArrivee(villeArrivee);
-//     string strMoyenTransport(moyenTransport);
-//     return "TS\n" + strVilleDepart + "\n" + strVilleArrivee+ "\n" + strMoyenTransport + "\n";
-// }
+string TrajetSimple::Formatage( void ) const {
+    string strVilleDepart(villeDepart);
+    string strVilleArrivee(villeArrivee);
+    string strMoyenTransport(moyenTransport);
+    return "TS\n" + strVilleDepart + "\n" + strVilleArrivee+ "\n" + strMoyenTransport + "\n";
+}
 
 //-------------------------------------------- Constructeurs - destructeur
 

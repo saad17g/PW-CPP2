@@ -45,7 +45,7 @@ public:
     const char* GetVilleArrivee( void ) const;
     virtual void Afficher( void ) const;
 
-    //std::string Formatage( void ) const;
+    std::string Formatage( void ) const;
 //-------------------------------------------- Constructeurs - destructeur
     TrajetSimple ( const char*, const char*, const char*);
     TrajetSimple ( const TrajetSimple& );

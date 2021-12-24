@@ -43,6 +43,9 @@ void TrajetCompose::Afficher( void ) const {
     cout << endl;
 } //----- Fin de Afficher
 
+string TrajetCompose::Formatage( void ) const{
+    
+}
 //string TrajetCompose::Formatage( void ) const {
     // string formatage;
     // formatage += "TC\n" + nombreTrajets;
