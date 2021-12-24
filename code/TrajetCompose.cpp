@@ -45,13 +45,6 @@ void TrajetCompose::AjouterTrajet ( Trajet* nouveauTrajet) {
 void TrajetCompose::RetirerTrajet ( void ) {
     listeTrajets.Retirer(); 
 } //----- Fin de RetirerTrajet
-
-
-string TrajetCompose::Export ( void ) const {
-
-    return "";
-}
-
 //-------------------------------------------- Constructeurs - destructeur
 
 TrajetCompose::TrajetCompose ( void )

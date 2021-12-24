@@ -13,7 +13,6 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "Trajet.h"
-#include <string>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -44,8 +43,6 @@ public:
     const char* GetVilleDepart( void ) const;
     const char* GetVilleArrivee( void ) const;
     virtual void Afficher( void ) const;
-
-    virtual string Export ( void ) const;
 
 //-------------------------------------------- Constructeurs - destructeur
     TrajetSimple ( const char*, const char*, const char*);

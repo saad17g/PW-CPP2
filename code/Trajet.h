@@ -12,7 +12,6 @@
 #define TRAJET_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <string>
 
 //------------------------------------------------------------- Constantes
 
@@ -43,9 +42,6 @@ public:
 
     // Affiche les informations du trajet.
     virtual void Afficher( void ) const = 0;
-
-    // Format les informations pour l'export
-    virtual string Export ( void ) const = 0;
 
 //-------------------------------------------- Constructeurs - destructeur
     Trajet ( );

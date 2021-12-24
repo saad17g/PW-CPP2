@@ -56,8 +56,6 @@ public:
     // Contrat :
     // le trajet existe parmis les trajets du trajet composé
 
-    virtual string Export ( void ) const;
-
 //-------------------------------------------- Constructeurs - destructeur
     TrajetCompose ( void );
 

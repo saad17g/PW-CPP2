@@ -39,12 +39,6 @@ void TrajetSimple::Afficher( void ) const {
         << moyenTransport << endl;
 }
 
-string TrajetSimple::Export ( void ) const {
-    return "TS\n" + string(villeDepart) \ 
-        + "\n" + string(villeArrivee) + "\n" \ 
-        + string(moyenTransport) + "\n";
-}
-
 //-------------------------------------------- Constructeurs - destructeur
 
 TrajetSimple::TrajetSimple ( const char* VilleDepart, 
