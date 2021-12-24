@@ -36,11 +36,14 @@ public:
 
   void Afficher( void ) const;
 
+  void ExportFile(const char* fileName) const;
+
   void Rechercher ( const char* VilleDepart, const char* VilleArrivee) const;
 
   void rechercheAvancee(const char* VilleDepart, const char* VilleArrivee) const;
   
   void Ajouter ( Trajet* );
+
 
   //-------------------------------------------- Constructeurs - destructeur
   Catalogue( void );

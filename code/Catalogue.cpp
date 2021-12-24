@@ -12,6 +12,7 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
+#include <fstream>
 #include <iostream>
 using namespace std;
 #include <cstring>
@@ -32,6 +33,16 @@ void Catalogue::Afficher (void) const {
   cout << "----- Fin du catalogue -------" << endl << endl;
 } //----- Fin de Afficher
 
+void Catalogue::ExportFile(const char* fileName) const
+{
+  ofstream outFile;
+  outFile.open(fileName);
+  for(int i = 0 ; i< listeTrajets.GetTaille(); i++)
+  {
+    outFile << listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
+  }
+  outFile.close();
+}
 void Catalogue::Rechercher ( const char* VilleDepart, const char* VilleArrivee) const {
 
   bool trajetTrouve = false;
