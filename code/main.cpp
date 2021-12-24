@@ -1,7 +1,11 @@
 #include "Catalogue.h"
 #include "TrajetSimple.h"
 #include "TrajetCompose.h"
+
 #include <cstring>
+#include <string>
+#include <istream>
+#include <fstream>
 
 #include <iostream>
 using namespace std;
@@ -15,7 +19,9 @@ void AfficherMenu()
     << "\t3. Ajouter un trajet composé " << endl\
     << "\t4. Recherche simple d'un trajet " << endl\
     << "\t5. Recherche avancée d'un trajet" << endl\
-    << "\t6. Quitter le menu" << endl;
+    << "\t6. Import un fichier de trajets" << endl\
+    << "\t7. Export le catalogue dans un fichier" << endl\
+    << "\t8. Quitter le menu" << endl;
 }
 
 // récupération d'un input de l'utilisateur
@@ -90,6 +96,47 @@ void RechercheAvancee( Catalogue& catalogue)
   delete [] VilleDepart;
 }
 
+TrajetSimple* importTrajetSimple(istream& inFile)
+{
+  string villeDepart;
+  string villeArrivee;
+  string Transport;
+  getline(inFile, villeDepart);
+  getline(inFile, villeArrivee);
+  getline(inFile, Transport);
+  TrajetSimple* trajet = new TrajetSimple(villeDepart.c_str(), villeArrivee.c_str(), Transport.c_str());
+  return trajet;
+}
+
+void ImportFile(Catalogue &catalogue, const char* fileName)
+{
+  ifstream inFile;
+  inFile.open(fileName);
+  string courant;
+  int nbTrajets;
+  while(inFile && inFile.eof() != 1)
+  {
+    getline(inFile, courant);
+    cout << courant << endl;
+    if (courant == "TS")
+    {
+      catalogue.Ajouter(importTrajetSimple(inFile));
+    } else if ( courant == "TC")
+    {
+      inFile >> nbTrajets;
+      getline(inFile, courant);
+      //nbTrajets = stoi(courant);
+      TrajetCompose* trajet = new TrajetCompose;
+      for(int i = 0 ; i < nbTrajets; i++)
+      {
+        trajet->AjouterTrajet(importTrajetSimple(inFile));
+      }
+      catalogue.Ajouter(trajet);
+    }
+  }
+  inFile.close();
+}
+
 int main()
 {
   cout << "//////////////////////////////////////////////////////////////////////////" << endl \
@@ -101,6 +148,7 @@ int main()
 
   Catalogue catalogue ;
   int nbTrajets;
+  string File;
   while(1)
   {
     cout <<endl;
@@ -138,7 +186,16 @@ int main()
         break;
       }
       case 6: {
-        cout << " Bon voyage ! " <<endl;
+        cout << "Veuillez rentrer le nom du fichier, avec son extension" <<endl;
+        cin >> File;
+        ImportFile(catalogue, File.c_str());
+        break;
+      }
+      case 7: {
+        break;
+      }
+      case 8: {
+        cout << "Bon voyage ! " <<endl;
         return 0;
       }
       default: {
