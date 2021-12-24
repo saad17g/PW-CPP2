@@ -52,7 +52,7 @@ string TrajetCompose::Formatage( void ) const{
     int i ;
     for (i = 0 ; i< nombreTrajets-1; i++)
     {
-        formatage+= listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
+        formatage += listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
     }
     formatage += listeTrajets.GetAtIndex(i-1)->GetSuivante()->GetValeur()->Formatage();
     return formatage;

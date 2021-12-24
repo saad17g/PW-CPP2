@@ -108,6 +108,27 @@ TrajetSimple* importTrajetSimple(istream& inFile)
   return trajet;
 }
 
+TrajetCompose* importTrajetCompose(istream &inFile)
+{
+  string courant;
+  int nbTrajets; 
+  inFile >> nbTrajets;
+  getline(inFile, courant);
+  TrajetCompose* trajet = new TrajetCompose();
+  for(int i = 0 ; i<nbTrajets; i++)
+  {
+    getline(inFile, courant);
+    if(courant == "TS")
+    {
+      trajet->AjouterTrajet(importTrajetSimple(inFile));
+    } else if (courant == "TC")
+    {
+      trajet->AjouterTrajet(importTrajetCompose(inFile));
+    }
+  }
+  return trajet;
+}
+
 void ImportFile(Catalogue &catalogue, const char* fileName)
 {
   ifstream inFile;
@@ -121,17 +142,9 @@ void ImportFile(Catalogue &catalogue, const char* fileName)
     if (courant == "TS")
     {
       catalogue.Ajouter(importTrajetSimple(inFile));
-    } else if ( courant == "TC")
+    } else if ( courant == "TC") 
     {
-      inFile >> nbTrajets;
-      getline(inFile, courant);
-      //nbTrajets = stoi(courant);
-      TrajetCompose* trajet = new TrajetCompose;
-      for(int i = 0 ; i < nbTrajets; i++)
-      {
-        trajet->AjouterTrajet(importTrajetSimple(inFile));
-      }
-      catalogue.Ajouter(trajet);
+      catalogue.Ajouter(importTrajetCompose(inFile));
     }
   }
   inFile.close();
