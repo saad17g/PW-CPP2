@@ -69,7 +69,7 @@ void Catalogue::ExportFile(const char* fileName, int option = 1)
 {
   ofstream outFile;
   outFile.open(fileName);
-  for(int i = 0 ; i< listeTrajets.GetTaille(); i++)
+  for(unsigned int i = 0 ; i< listeTrajets.GetTaille(); i++)
   {
     if(option == 1)
     {
@@ -95,21 +95,28 @@ void Catalogue::ExportFile(const char* fileName, int option = 1)
   outFile.close();
 }
 
-void Catalogue::ImportFile(const char* fileName)
+void Catalogue::ImportFile(const char* fileName, int option = 1)
 {
   ifstream inFile;
   inFile.open(fileName);
   string courant;
-  int nbTrajets;
   while(inFile && inFile.eof() != 1)
   {
     getline(inFile, courant);
     if (courant == "TS")
     {
-      Ajouter(importTrajetSimple(inFile));
+      TrajetSimple* trajetS = importTrajetSimple(inFile);
+      if(option == 1 || option == 3)
+      {
+        Ajouter(trajetS);
+      }
     } else if ( courant == "TC") 
     {
-      Ajouter(importTrajetCompose(inFile));
+      TrajetCompose* trajetC = importTrajetCompose(inFile);
+      if(option == 1 || option == 4)
+      {
+        Ajouter(trajetC);
+      }
     }
   }
   inFile.close();

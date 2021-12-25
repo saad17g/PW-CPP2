@@ -1,6 +1,6 @@
 CXX = g++
 # CXXFLAGS = -Wall -Wpedantic -pedantic -std=c++11 -ansi -g 
-CXXFLAGS = -std=c++11
+CXXFLAGS = -std=c++11 -Wall -Wpedantic -pedantic -g
 SOURCES = main.cpp Trajet.cpp TrajetSimple.cpp Cellule.cpp ListeChainee.cpp \
 TrajetCompose.cpp Catalogue.cpp
 OBJECTS = $(subst .cpp,.o, $(SOURCES))

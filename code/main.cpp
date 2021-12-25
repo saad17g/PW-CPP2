@@ -148,7 +148,29 @@ int main()
       case 6: {
         cout << "Veuillez rentrer le nom du fichier, avec son extension" <<endl;
         cin >> File;
-        catalogue.ImportFile(File.c_str());
+        cout << "Quelle option de restitution souhaitez-vous utiliser ? " << endl; 
+        cout << "\t1 : Sans critère de selection" << endl;
+        cout << "\t2 : Selon le type de trajet" << endl;
+        cout << "\t3 : Selon la ville de départ ou d'arrivée" << endl;
+        cout << "\t4 : Selon une sélection de trajets" << endl;
+        cin >> option;
+        switch(option)
+        {
+          case 1 : {
+            catalogue.ImportFile(File.c_str(), option);
+            break;
+          }
+          case 2 : {
+            int optionType;
+            cout << "Quelle type de trajet souhaitez-vous restituer ?" <<endl;
+            cout << "\t1 : simple" <<endl;
+            cout << "\t2 : composé" <<endl;
+            cin >> optionType;
+            option += optionType;
+            catalogue.ImportFile(File.c_str(), option);
+            break;
+          }
+        }
         break;
       }
       case 7: {

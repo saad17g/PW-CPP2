@@ -48,7 +48,7 @@ public:
 
   void ExportFile(const char* fileName, int option);
 
-  void ImportFile(const char* fileName);
+  void ImportFile(const char* fileName, int option);
 
   void Rechercher ( const char* VilleDepart, const char* VilleArrivee) const;
 
