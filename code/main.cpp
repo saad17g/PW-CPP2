@@ -109,6 +109,7 @@ int main()
   int nbTrajets;
   string File;
   int option;
+  int optionType;
   while(1)
   {
     cout <<endl;
@@ -166,7 +167,7 @@ int main()
             cout << "\t1 : simple" <<endl;
             cout << "\t2 : composé" <<endl;
             cin >> optionType;
-            option += optionType;
+            option += 10 * optionType;
             catalogue.ImportFile(File.c_str(), option);
             break;
           }
@@ -179,7 +180,7 @@ int main()
         cout << "Quelle option de sauvegarde souhaitez-vous utiliser ? " << endl; 
         cout << "\t1 : Sans critère de selection" << endl;
         cout << "\t2 : Selon le type de trajet" << endl;
-        cout << "\t3 : Selon la ville de départ ou d'arrivée" << endl;
+        cout << "\t3 : Selon la ville de départ et/ou d'arrivée" << endl;
         cout << "\t4 : Selon une sélection de trajets" << endl;
         cin >> option;
         switch (option)
@@ -189,13 +190,46 @@ int main()
             break;
           }
           case 2 : {
-            int optionType;
             cout << "Quelle type de trajet souhaitez-vous sauvegarder ?" <<endl;
             cout << "\t1 : simple" <<endl;
             cout << "\t2 : composé" <<endl;
             cin >> optionType;
-            option += optionType;
+            option += 10 * optionType;
             catalogue.ExportFile(File.c_str(), option);
+            break;
+          }
+          case 3 : {
+            string VilleDepartRecherchee;
+            string VilleArriveeRecherchee;
+            cout <<"Veuillez choisir une des options suivante : " <<endl;
+            cout <<"\t1 : Selon la ville de départ" <<endl;
+            cout <<"\t2 : Selon la ville d'arrivée" <<endl;
+            cout <<"\t3 : Selon la ville de départ et d'arrivée " <<endl;
+            cin >> optionType;
+            option += 10*optionType;
+            switch(optionType)
+            {
+              case 1 : {
+                cout << "Veuillez rentrer le nom de la ville de départ : ";
+                cin >> VilleDepartRecherchee;
+                catalogue.ExportFile(File.c_str(), option, VilleDepartRecherchee);
+                break;
+              }
+              case 2 : {
+                cout << "Veuillez rentrer le nom de la ville d'arrivée : ";
+                cin >> VilleArriveeRecherchee;
+                catalogue.ExportFile(File.c_str(), option, NULL, VilleArriveeRecherchee);
+                break;
+              }
+              case 3 : {
+                cout << "Veuillez rentrer le nom de la ville de départ : ";
+                cin >> VilleDepartRecherchee;
+                cout << endl << "Veuillez rentrer le nom de la ville d'arrivée : ";
+                cin >> VilleArriveeRecherchee;
+                catalogue.ExportFile(File.c_str(), option, VilleDepartRecherchee, VilleArriveeRecherchee);
+                break;
+              }
+            }
             break;
           }
         }

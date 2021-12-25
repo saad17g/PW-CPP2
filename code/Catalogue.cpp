@@ -65,7 +65,7 @@ TrajetCompose* Catalogue::importTrajetCompose(istream &inFile)
   return trajet;
 }
 
-void Catalogue::ExportFile(const char* fileName, int option = 1)
+void Catalogue::ExportFile(const char* fileName, int option = 1, string villeDepart, string villeArrivee)
 {
   ofstream outFile;
   outFile.open(fileName);
@@ -76,7 +76,7 @@ void Catalogue::ExportFile(const char* fileName, int option = 1)
       outFile << listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
     } 
     // sauvegarde des trajets simples uniquement: 
-    else if(option == 3)
+    else if(option == 12)
     {
       if(listeTrajets.GetAtIndex(i)->GetValeur()->Formatage()[1] == 'S')
       {
@@ -84,9 +84,33 @@ void Catalogue::ExportFile(const char* fileName, int option = 1)
       }
     }
     // sauvegarde des trajets composés uniquement:
-    else if(option == 4)
+    else if(option == 22)
     {
       if(listeTrajets.GetAtIndex(i)->GetValeur()->Formatage()[1] == 'C')
+      {
+        outFile << listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
+      }
+    }
+    // sauvegarde selon ville de départ 
+    else if (option == 13)
+    {
+      if(strcmp(listeTrajets.GetAtIndex(i)->GetValeur()->GetVilleDepart(), villeDepart.c_str()) == 0)
+      {
+        outFile << listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
+      }
+    }
+    // sauvegarde selon ville d'arrivée 
+    else if (option == 23)
+    {
+      if(strcmp(listeTrajets.GetAtIndex(i)->GetValeur()->GetVilleArrivee(), villeArrivee.c_str())== 0)
+      {
+        outFile << listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
+      }
+    }
+    else if (option == 33)
+    {
+      if(strcmp(listeTrajets.GetAtIndex(i)->GetValeur()->GetVilleDepart(), villeDepart.c_str()) == 0 
+      && strcmp(listeTrajets.GetAtIndex(i)->GetValeur()->GetVilleArrivee(), villeArrivee.c_str()) == 0)
       {
         outFile << listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
       }
@@ -95,7 +119,7 @@ void Catalogue::ExportFile(const char* fileName, int option = 1)
   outFile.close();
 }
 
-void Catalogue::ImportFile(const char* fileName, int option = 1)
+void Catalogue::ImportFile(const char* fileName, int option = 1, string villeDepar, string villeArrivee)
 {
   ifstream inFile;
   inFile.open(fileName);
@@ -106,14 +130,14 @@ void Catalogue::ImportFile(const char* fileName, int option = 1)
     if (courant == "TS")
     {
       TrajetSimple* trajetS = importTrajetSimple(inFile);
-      if(option == 1 || option == 3)
+      if(option == 1 || option == 12)
       {
         Ajouter(trajetS);
       }
     } else if ( courant == "TC") 
     {
       TrajetCompose* trajetC = importTrajetCompose(inFile);
-      if(option == 1 || option == 4)
+      if(option == 1 || option == 22)
       {
         Ajouter(trajetC);
       }
