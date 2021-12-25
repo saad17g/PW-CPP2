@@ -46,7 +46,7 @@ public:
 
   void Afficher( void ) const;
 
-  void ExportFile(const char* fileName) const;
+  void ExportFile(const char* fileName, int option);
 
   void ImportFile(const char* fileName);
 

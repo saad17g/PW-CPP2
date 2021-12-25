@@ -65,13 +65,32 @@ TrajetCompose* Catalogue::importTrajetCompose(istream &inFile)
   return trajet;
 }
 
-void Catalogue::ExportFile(const char* fileName) const
+void Catalogue::ExportFile(const char* fileName, int option = 1)
 {
   ofstream outFile;
   outFile.open(fileName);
   for(int i = 0 ; i< listeTrajets.GetTaille(); i++)
   {
-    outFile << listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
+    if(option == 1)
+    {
+      outFile << listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
+    } 
+    // sauvegarde des trajets simples uniquement: 
+    else if(option == 3)
+    {
+      if(listeTrajets.GetAtIndex(i)->GetValeur()->Formatage()[1] == 'S')
+      {
+        outFile << listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
+      }
+    }
+    // sauvegarde des trajets composés uniquement:
+    else if(option == 4)
+    {
+      if(listeTrajets.GetAtIndex(i)->GetValeur()->Formatage()[1] == 'C')
+      {
+        outFile << listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
+      }
+    }
   }
   outFile.close();
 }
