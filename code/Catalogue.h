@@ -46,15 +46,17 @@ public:
 
   void Afficher( void ) const;
 
-  void ExportFile(const char* fileName, int option, string villeDepart = "", string villeArrivee = "");
+  void ExportFile(const char* fileName, int option = 1, string villeDepart = "", string villeArrivee = "", unsigned int debut = 0, unsigned int fin = 0);
 
-  void ImportFile(const char* fileName, int option, string villeDepart = "", string villeArrivee = "");
+  void ImportFile(const char* fileName, int option = 1, string villeDepart = "", string villeArrivee = "", unsigned int debut = 0, unsigned int fin = 0);
 
   void Rechercher ( const char* VilleDepart, const char* VilleArrivee) const;
 
   void rechercheAvancee(const char* VilleDepart, const char* VilleArrivee) const;
   
   void Ajouter ( Trajet* );
+
+  unsigned int GetNbTrajets ( void );
 
 
   //-------------------------------------------- Constructeurs - destructeur

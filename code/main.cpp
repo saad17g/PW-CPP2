@@ -205,6 +205,21 @@ int main()
             }
             break;
           }
+          case 4 : {
+            unsigned int debutIntervalle;
+            unsigned int finIntervalle;
+            cout << "Veuillez insérer l'indice du premier trajet à restituer : " ;
+            cin >> debutIntervalle;
+            cout << "Veuillez insérer l'indice du dernier trajet à restituer : ";
+            cin >> finIntervalle;
+            if( finIntervalle < debutIntervalle || finIntervalle - debutIntervalle +1 < 1)
+            {
+              cout << "Les indices insérés ne permettent pas d'effectuer une restitution ";
+            } else {
+              catalogue.ImportFile(File.c_str(), option, "", "", debutIntervalle, finIntervalle);
+            }
+            break;
+          }
         }
         break;
       }
@@ -263,6 +278,21 @@ int main()
                 catalogue.ExportFile(File.c_str(), option, VilleDepartRecherchee, VilleArriveeRecherchee);
                 break;
               }
+            }
+            break;
+          }
+          case 4 : {
+            unsigned int debutIntervalle;
+            unsigned int finIntervalle;
+            cout << "Veuillez insérer l'indice du premier trajet à sauvegarder : " ;
+            cin >> debutIntervalle;
+            cout << "Veuillez insérer l'indice du dernier trajet à sauvegarder : ";
+            cin >> finIntervalle;
+            if( finIntervalle < debutIntervalle || finIntervalle - debutIntervalle +1 < 1  || finIntervalle >= catalogue.GetNbTrajets())
+            {
+              cout << "Les indices insérés ne permettent pas d'effectuer une recherche ";
+            } else {
+              catalogue.ExportFile(File.c_str(), option, "", "", debutIntervalle, finIntervalle);
             }
             break;
           }

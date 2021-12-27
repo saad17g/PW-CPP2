@@ -65,7 +65,7 @@ TrajetCompose* Catalogue::importTrajetCompose(istream &inFile)
   return trajet;
 }
 
-void Catalogue::ExportFile(const char* fileName, int option = 1, string villeDepart, string villeArrivee)
+void Catalogue::ExportFile(const char* fileName, int option, string villeDepart, string villeArrivee, unsigned int debut, unsigned int fin)
 {
   ofstream outFile;
   outFile.open(fileName);
@@ -117,15 +117,24 @@ void Catalogue::ExportFile(const char* fileName, int option = 1, string villeDep
         outFile << listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
       }
     }
+    // sauvegarde d'intervalle
+    else if (option == 4)
+    {
+      if(i>= debut && i <= fin)
+      {
+        outFile << listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
+      }
+    }
   }
   outFile.close();
 }
 
-void Catalogue::ImportFile(const char* fileName, int option = 1, string villeDepart, string villeArrivee)
+void Catalogue::ImportFile(const char* fileName, int option, string villeDepart, string villeArrivee, unsigned int debut, unsigned int fin)
 {
   ifstream inFile;
   inFile.open(fileName);
   string courant;
+  unsigned int indiceTrajet = 0;
   while(inFile && inFile.eof() != 1)
   {
     getline(inFile, courant);
@@ -144,7 +153,11 @@ void Catalogue::ImportFile(const char* fileName, int option = 1, string villeDep
       } else if (option == 33 && strcmp(trajetS->GetVilleDepart(), villeDepart.c_str()) == 0 && strcmp(trajetS->GetVilleArrivee(), villeArrivee.c_str()) == 0)
       {
         Ajouter(trajetS);
+      } else if(option == 4 && indiceTrajet >= debut && indiceTrajet <= fin)
+      {
+        Ajouter(trajetS);
       }
+      indiceTrajet++;
     } else if ( courant == "TC") 
     {
       TrajetCompose* trajetC = importTrajetCompose(inFile);
@@ -160,7 +173,11 @@ void Catalogue::ImportFile(const char* fileName, int option = 1, string villeDep
       } else if (option == 33 && strcmp(trajetC->GetVilleDepart(), villeDepart.c_str()) == 0 && strcmp(trajetC->GetVilleArrivee(), villeArrivee.c_str()) == 0)
       {
         Ajouter(trajetC);
+      } else if(option == 4 && indiceTrajet >= debut && indiceTrajet <= fin)
+      {
+        Ajouter(trajetC);
       }
+      indiceTrajet++;
     }
   }
   inFile.close();
@@ -208,6 +225,10 @@ void Catalogue::rechercheAvancee( const char* VilleDepart, const char* VilleArri
 void Catalogue::Ajouter( Trajet* trajet) {
   listeTrajets.AjouterOrdonne(new Cellule(trajet, NULL));
 } //----- Fin de Ajouter
+
+unsigned int Catalogue::GetNbTrajets( void ){
+  return listeTrajets.GetTaille();
+} //----- Fin de GetNbTrajets()
 
 //-------------------------------------------- Constructeurs - destructeur
 
