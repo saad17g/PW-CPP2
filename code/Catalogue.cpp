@@ -71,6 +71,7 @@ void Catalogue::ExportFile(const char* fileName, int option = 1, string villeDep
   outFile.open(fileName);
   for(unsigned int i = 0 ; i< listeTrajets.GetTaille(); i++)
   {
+    // sauvegarde tous les trajets
     if(option == 1)
     {
       outFile << listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
@@ -107,6 +108,7 @@ void Catalogue::ExportFile(const char* fileName, int option = 1, string villeDep
         outFile << listeTrajets.GetAtIndex(i)->GetValeur()->Formatage();
       }
     }
+    // sauvegarde selon les deux villes
     else if (option == 33)
     {
       if(strcmp(listeTrajets.GetAtIndex(i)->GetValeur()->GetVilleDepart(), villeDepart.c_str()) == 0 
@@ -119,7 +121,7 @@ void Catalogue::ExportFile(const char* fileName, int option = 1, string villeDep
   outFile.close();
 }
 
-void Catalogue::ImportFile(const char* fileName, int option = 1, string villeDepar, string villeArrivee)
+void Catalogue::ImportFile(const char* fileName, int option = 1, string villeDepart, string villeArrivee)
 {
   ifstream inFile;
   inFile.open(fileName);
@@ -133,11 +135,29 @@ void Catalogue::ImportFile(const char* fileName, int option = 1, string villeDep
       if(option == 1 || option == 12)
       {
         Ajouter(trajetS);
+      } else if (option == 13 && strcmp(trajetS->GetVilleDepart(), villeDepart.c_str()) == 0)
+      {
+        Ajouter(trajetS);
+      } else if( option == 23 && strcmp(trajetS->GetVilleArrivee(), villeArrivee.c_str())== 0)
+      {
+        Ajouter(trajetS);
+      } else if (option == 33 && strcmp(trajetS->GetVilleDepart(), villeDepart.c_str()) == 0 && strcmp(trajetS->GetVilleArrivee(), villeArrivee.c_str()) == 0)
+      {
+        Ajouter(trajetS);
       }
     } else if ( courant == "TC") 
     {
       TrajetCompose* trajetC = importTrajetCompose(inFile);
       if(option == 1 || option == 22)
+      {
+        Ajouter(trajetC);
+      }else if (option == 13 && strcmp(trajetC->GetVilleDepart(), villeDepart.c_str()) == 0)
+      {
+        Ajouter(trajetC);
+      } else if( option == 23 && strcmp(trajetC->GetVilleArrivee(), villeArrivee.c_str())== 0)
+      {
+        Ajouter(trajetC);
+      } else if (option == 33 && strcmp(trajetC->GetVilleDepart(), villeDepart.c_str()) == 0 && strcmp(trajetC->GetVilleArrivee(), villeArrivee.c_str()) == 0)
       {
         Ajouter(trajetC);
       }

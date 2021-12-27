@@ -171,6 +171,40 @@ int main()
             catalogue.ImportFile(File.c_str(), option);
             break;
           }
+          case 3 : {
+            string VilleDepartRecherchee;
+            string VilleArriveeRecherchee;
+            cout <<"Veuillez choisir une des options suivante : " <<endl;
+            cout <<"\t1 : Selon la ville de départ" <<endl;
+            cout <<"\t2 : Selon la ville d'arrivée" <<endl;
+            cout <<"\t3 : Selon la ville de départ et d'arrivée " <<endl;
+            cin >> optionType;
+            option += 10*optionType;
+            switch(optionType)
+            {
+              case 1 : {
+                cout << "Veuillez rentrer le nom de la ville de départ : ";
+                cin >> VilleDepartRecherchee;
+                catalogue.ImportFile(File.c_str(), option, VilleDepartRecherchee);
+                break;
+              }
+              case 2 : {
+                cout << "Veuillez rentrer le nom de la ville d'arrivée : ";
+                cin >> VilleArriveeRecherchee;
+                catalogue.ImportFile(File.c_str(), option, NULL, VilleArriveeRecherchee);
+                break;
+              }
+              case 3 : {
+                cout << "Veuillez rentrer le nom de la ville de départ : ";
+                cin >> VilleDepartRecherchee;
+                cout << endl << "Veuillez rentrer le nom de la ville d'arrivée : ";
+                cin >> VilleArriveeRecherchee;
+                catalogue.ImportFile(File.c_str(), option, VilleDepartRecherchee, VilleArriveeRecherchee);
+                break;
+              }
+            }
+            break;
+          }
         }
         break;
       }
