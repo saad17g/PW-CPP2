@@ -102,6 +102,7 @@ int main()
       << "// Bienvenue au projet POO2 réalisé par Jules DUCANGE et Saad GUESSOUS  //" << endl \
       << "// Ce projet consiste à pouvoir gérer un catalogue de trajets.          //" << endl \
       << "// Le projet inclue la méthode de recherche avancée.                    //" <<endl \
+      << "// Le projet inclue les 4 scénarios de sauvegarde/chargement.           //" <<endl \
       << "//////////////////////////////////////////////////////////////////////////" << endl;
   cout << endl;
 
